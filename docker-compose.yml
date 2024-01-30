@@ -1,0 +1,45 @@
+version: '3.8'
+
+networks:
+  app_network:
+    driver: bridge
+
+services:
+  app:
+    container_name: 'app'
+    environment:
+      - APPID=1
+      - POSTGRES_DB=postgres
+      - POSTGRES_HOST=main_postgres
+      - POSTGRES_PORT=5432
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=superpassword
+    build: .
+    ports:
+      - '3000:3000'
+    depends_on:
+      - main_postgres
+    networks:
+      - app_network
+
+  main_postgres:
+    image: postgres
+    environment:
+      POSTGRES_DB: 'postgres'
+      POSTGRES_USER: 'root'
+      POSTGRES_PASSWORD: 'superpassword'
+    ports:
+      - '5432:5432'
+    networks:
+      - app_network
+
+  test_postgres:
+    image: postgres
+    environment:
+      POSTGRES_DB: 'postgres'
+      POSTGRES_USER: 'root'
+      POSTGRES_PASSWORD: 'superpassword'
+    ports:
+      - '5433:5432'
+    networks:
+      - app_network
