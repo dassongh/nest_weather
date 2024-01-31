@@ -4,4 +4,4 @@ export const WeatherPart = {
   hourly: 'hourly',
 } as const;
 
-export const AvailableWeatherParts = [...Object.values(WeatherPart), 'alerts', 'minutely'] as const;
+export const AvailableWeatherParts = [...Object.keys(WeatherPart), 'alerts', 'minutely'] as const;

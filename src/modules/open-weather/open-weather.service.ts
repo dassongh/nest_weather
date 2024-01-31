@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 
 import { WeatherResponse } from './interfaces';
@@ -13,13 +13,18 @@ export class OpenWeatherService {
     this.baseUrl = configService.get<string>('OPEN_WEATHER_BASE_URL');
   }
 
-  public getByLatLng(latitude: number, longitude: number, exclude?: string[]): Promise<WeatherResponse> {
+  public async getByLatLng(latitude: number, longitude: number, exclude?: string[]): Promise<WeatherResponse> {
     let url = `${this.baseUrl}?lat=${latitude}&lon=${longitude}&appid=${this.apiKey}`;
 
     if (exclude) {
       url += `&exclude=${exclude.join(',')}`;
     }
 
-    return fetch(url).then(res => res.json());
+    const res = await fetch(url).then(res => res.json());
+    if (res.cod) {
+      throw new HttpException(res.message, 424);
+    }
+
+    return res;
   }
 }

@@ -3,11 +3,13 @@ import { IsDecimal, IsEnum, IsNotEmpty } from 'class-validator';
 import { WeatherPart } from '../weather.constants';
 
 export class SaveWeatherDto {
-  @IsDecimal({ decimal_digits: '2,2' })
+  latitude: number;
+
+  @IsDecimal({ decimal_digits: '2', force_decimal: true }, { message: 'Invalid latitude value' })
   @IsNotEmpty()
   lat: string;
 
-  @IsDecimal({ decimal_digits: '3,2' })
+  @IsDecimal({ decimal_digits: '2', force_decimal: true }, { message: 'Invalid longitude value' })
   @IsNotEmpty()
   lon: string;
 
