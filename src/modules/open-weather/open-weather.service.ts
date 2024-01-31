@@ -13,7 +13,7 @@ export class OpenWeatherService {
     this.baseUrl = configService.get<string>('OPEN_WEATHER_BASE_URL');
   }
 
-  getByLatLng(latitude: number, longitude: number, exclude?: string[]): Promise<WeatherResponse> {
+  public getByLatLng(latitude: number, longitude: number, exclude?: string[]): Promise<WeatherResponse> {
     let url = `${this.baseUrl}?lat=${latitude}&lon=${longitude}&appid=${this.apiKey}`;
 
     if (exclude) {

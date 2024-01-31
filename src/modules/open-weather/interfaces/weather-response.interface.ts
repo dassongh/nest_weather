@@ -10,7 +10,7 @@ export interface WeatherResponse {
   alerts: Alert[];
 }
 
-interface Current {
+export interface Current {
   dt: number;
   sunrise: number;
   sunset: number;
@@ -25,22 +25,22 @@ interface Current {
   wind_speed: number;
   wind_deg: number;
   wind_gust: number;
-  weather: Weather[];
+  weather: WeatherCurrent[];
 }
 
-interface Weather {
+interface WeatherCurrent {
   id: number;
   main: string;
   description: string;
   icon: string;
 }
 
-interface Minutely {
+export interface Minutely {
   dt: number;
   precipitation: number;
 }
 
-interface Hourly {
+export interface Hourly {
   dt: number;
   temp: number;
   feels_like: number;
@@ -53,18 +53,18 @@ interface Hourly {
   wind_speed: number;
   wind_deg: number;
   wind_gust: number;
-  weather: Weather2[];
+  weather: WeatherHourly[];
   pop: number;
 }
 
-interface Weather2 {
+interface WeatherHourly {
   id: number;
   main: string;
   description: string;
   icon: string;
 }
 
-interface Daily {
+export interface Daily {
   dt: number;
   sunrise: number;
   sunset: number;
@@ -80,7 +80,7 @@ interface Daily {
   wind_speed: number;
   wind_deg: number;
   wind_gust: number;
-  weather: Weather3[];
+  weather: WeatherDaily[];
   clouds: number;
   pop: number;
   rain: number;
@@ -103,14 +103,14 @@ interface FeelsLike {
   morn: number;
 }
 
-interface Weather3 {
+interface WeatherDaily {
   id: number;
   main: string;
   description: string;
   icon: string;
 }
 
-interface Alert {
+export interface Alert {
   sender_name: string;
   event: string;
   start: number;

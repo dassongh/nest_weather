@@ -1,7 +1,11 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
+
 import { OpenWeatherModule } from './modules/open-weather/open-weather.module';
+import { WeatherModule } from './modules/weather/weather.module';
+
+import { Weather } from './modules/weather/weather.entity';
 
 @Module({
   imports: [
@@ -16,11 +20,12 @@ import { OpenWeatherModule } from './modules/open-weather/open-weather.module';
         username: config.get<string>('POSTGRES_USER'),
         password: config.get<string>('POSTGRES_PASSWORD'),
         database: config.get<string>('POSTGRES_DB'),
-        entities: [],
+        entities: [Weather],
         synchronize: true,
       }),
     }),
     OpenWeatherModule,
+    WeatherModule,
   ],
   controllers: [],
   providers: [],
