@@ -1,6 +1,6 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, Query } from '@nestjs/common';
 
-import { SaveWeatherDto } from './dto/save-weather.dto';
+import { GetQueryDto, SaveWeatherDto } from './dto';
 import { WeatherService } from './weather.service';
 
 @Controller('weather')
@@ -8,7 +8,12 @@ export class WeatherController {
   constructor(private weatherService: WeatherService) {}
 
   @Post()
-  public async save(@Body() dto: SaveWeatherDto) {
+  public save(@Body() dto: SaveWeatherDto) {
     return this.weatherService.save(dto);
+  }
+
+  @Get()
+  public get(@Query() query: GetQueryDto) {
+    return this.weatherService.get(query.lat, query.lon, query.part);
   }
 }

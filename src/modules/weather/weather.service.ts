@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 
-import { SaveWeatherDto } from './dto/save-weather.dto';
-import { AvailableWeatherParts } from './weather.constants';
+import { SaveWeatherDto } from './dto';
+import { AvailableWeatherParts, WeatherPart } from './weather.constants';
 import { Weather } from './weather.entity';
 import { WeatherRepository } from './weather.repository';
 
@@ -30,5 +30,7 @@ export class WeatherService {
     return this.weatherRepository.save(payload);
   }
 
-  public get() {}
+  public get(lat: string, lon: string, part: keyof typeof WeatherPart): Promise<Weather> {
+    return this.weatherRepository.findOneByOrFail({ lat, lon, part });
+  }
 }
