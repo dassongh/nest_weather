@@ -3,7 +3,7 @@ import { map } from 'rxjs/operators';
 
 import { CallHandler, ExecutionContext, Injectable, NestInterceptor } from '@nestjs/common';
 import { Current, Daily, Hourly } from '../open-weather/interfaces';
-import { InterceptorResponse } from './interfaces';
+import { InterceptorResponseDto } from './dto';
 import { WeatherPart } from './weather.constants';
 import { Weather } from './weather.entity';
 
@@ -13,7 +13,7 @@ export class WeatherInterceptor implements NestInterceptor {
     return next.handle().pipe(map(data => this.transformResponse(data)));
   }
 
-  private transformResponse(data: Weather): InterceptorResponse {
+  private transformResponse(data: Weather): InterceptorResponseDto {
     const part = JSON.parse(data.weatherData);
     const key = Object.keys(part)[0];
 

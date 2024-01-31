@@ -7,7 +7,7 @@ import { Test } from '@nestjs/testing';
 import { AppModule } from '../src/app.module';
 import { DatabaseExceptionFilter } from '../src/common/database-exception.filter';
 
-describe('App e2e', () => {
+describe('WeatherService', () => {
   let app: INestApplication;
   let db: DataSource;
 
@@ -24,9 +24,14 @@ describe('App e2e', () => {
     await app.listen(4004);
 
     db = app.get(DataSource);
-    await db.getRepository('User').delete({});
 
-    pactum.request.setBaseUrl('http://localhost:3000');
+    pactum.request.setBaseUrl('http://localhost:4004');
+  });
+
+  describe('App', () => {
+    it('should be defined', () => {
+      expect(app).toBeDefined();
+    });
   });
 
   afterAll(async () => {

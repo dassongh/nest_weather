@@ -1,4 +1,4 @@
-export interface InterceptorResponse {
+export abstract class InterceptorResponseDto {
   sunrise: string | null;
   sunset: string | null;
   temp: string;
