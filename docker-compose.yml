@@ -8,12 +8,12 @@ services:
   app:
     container_name: 'app'
     environment:
-      - APPID=1
       - POSTGRES_DB=postgres
       - POSTGRES_HOST=main_postgres
       - POSTGRES_PORT=5432
       - POSTGRES_USER=root
       - POSTGRES_PASSWORD=superpassword
+      - OPEN_WEATHER_BASE_URL="https://api.openweathermap.org/data/3.0/onecall"
     build: .
     ports:
       - '3000:3000'
