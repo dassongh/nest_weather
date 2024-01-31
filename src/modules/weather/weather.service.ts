@@ -1,10 +1,11 @@
 import { Injectable } from '@nestjs/common';
 
-import { OpenWeatherService } from '../open-weather/open-weather.service';
 import { SaveWeatherDto } from './dto/save-weather.dto';
 import { AvailableWeatherParts } from './weather.constants';
 import { Weather } from './weather.entity';
 import { WeatherRepository } from './weather.repository';
+
+import { OpenWeatherService } from '../open-weather/open-weather.service';
 
 @Injectable()
 export class WeatherService {
@@ -18,8 +19,9 @@ export class WeatherService {
     const weatherObject = await this.openWeatherService.getByLatLng(Number(dto.lat), Number(dto.lon), excludeParts);
 
     const payload = {
-      lat: weatherObject.lat,
-      lon: weatherObject.lon,
+      lat: weatherObject.lat.toString(),
+      lon: weatherObject.lon.toString(),
+      part: dto.part,
       timezone: weatherObject.timezone,
       timezone_offset: weatherObject.timezone_offset,
       weatherData: weatherObject[dto.part],
