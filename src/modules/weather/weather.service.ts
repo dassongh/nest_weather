@@ -24,7 +24,9 @@ export class WeatherService {
       part: dto.part,
       timezone: weatherObject.timezone,
       timezone_offset: weatherObject.timezone_offset,
-      weatherData: weatherObject[dto.part],
+      weatherData: JSON.stringify({
+        [dto.part]: weatherObject[dto.part],
+      }),
     };
 
     return this.weatherRepository.save(payload);

@@ -1,5 +1,4 @@
 import { Column, Entity, Index, PrimaryGeneratedColumn } from 'typeorm';
-import { Current, Daily, Hourly } from '../open-weather/interfaces';
 import { WeatherPart } from './weather.constants';
 
 @Entity()
@@ -24,5 +23,5 @@ export class Weather {
   timezone_offset: number;
 
   @Column({ type: 'json' })
-  weatherData: Current | Hourly[] | Daily[];
+  weatherData: string;
 }
